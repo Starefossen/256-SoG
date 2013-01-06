@@ -9,6 +9,11 @@ body {
   margin-left: 20px;
 }
 
+/* Logo Icon */
+h3.muted > img {
+  margin-top: -5px;
+}
+
 /* Custom container */
 .container {
   margin: 0 auto;
