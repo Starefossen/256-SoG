@@ -46,9 +46,15 @@
             </div>
           </div>
         </div><!-- /.navbar -->
-      </div>
-
+      </div>      
+      
       <ul class="thumbnails">
+        
+        <li class="span2">
+          <button class="btn btn-primary" id="slideshow">
+            <i class="icon-play icon-white"></i> Play Slideshow
+          </button>
+        </li>
         
         <li class="span2">
           <a href="assets/img/gallery/full/IMG_0639.jpg" class="thumbnail" rel="gallery" title="Implementation of SIMD nodes in VHDL">
@@ -285,6 +291,11 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('a.thumbnail').fancybox({arrows : true});
+        $('#slideshow').on('click', function() {
+          $.fancybox.open($('a.thumbnail'), {
+            autoPlay: true
+          });
+        });
       });
     </script>
 
