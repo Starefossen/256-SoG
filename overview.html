@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>256 Shades of Gray &middot; Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/app.css" rel="stylesheet">
+    <link href="assets/css/lena.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="masthead">
+        <h3 class="muted"><img src="assets/ico/apple-touch-icon-26-precomposed.png" alt=""> 256 Shades of Gray</h3>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Overview</a></li>
+                <li class="active"><a href="lena.html">LENA</a></li>
+                <li><a href="#">SCU</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- /.navbar -->
+      </div>
+      
+      <div id="picture">
+        <!-- Consoll -->
+        <div class="more" style="top: 23px; left: 155px;">
+          <a href="#"><img src="assets/img/more.png"/></a>
+          <span>Consoll Port</span>
+        </div>
+
+        <!-- Power -->
+        <div class="more" style="top: 280px; left: 80px;">
+          <a href="#"><img src="assets/img/more.png"/></a>
+          <span>Power Supply</span>
+        </div>
+
+        <!-- SCU -->
+        <div class="more" style="top: 215px; left: 465px;">
+          <a href="#"><img src="assets/img/more.png"/></a>
+          <span>System Control Unit</span>
+        </div>
+
+        <!-- LENA -->
+        <div class="more" style="top: 330px; left: 782px;">
+          <a href="#"><img src="assets/img/more.png"/></a>
+          <span>LENA Processor</span>
+        </div>
+
+        <!-- SD Card -->
+        <div class="more" style="top: 530px; left: 430px;">
+          <a href="#"><img src="assets/img/more.png"/></a>
+          <span>SD Card Reader</span>
+        </div>
+        
+        <!-- VGA -->
+        <div class="more" style="top: 550px; left: 670px;">
+          <a href="#"><img src="assets/img/more.png"/></a>
+          <span>VGA Output</span>
+        </div>
+
+        
+        <!-- Info Boxes -->
+        <div id="infobox">
+          <span class="close"><a href="#"><img src="assets/img/close.png"/></a></span>
+          <br/>
+          <div style="text-align: center;">
+            <img src="assets/img/1287666826226.png"/><br/>
+            <a href="#">Comming soon...</a>
+          </div>
+        </div>
+        <!-- Dimmed Background -->
+        <div id="fade_bg">&nbsp;</div>
+      </div>
+      
+      <hr>
+
+      <div class="footer">
+        <p>&copy; 256 Shades of Gray 2012</p>
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        //Blur Links (Prevents Outline)
+        $('a').click(function() {
+          this.blur();
+        });
+        
+        //Hide all item descriptions in the info box
+        // $("#infobox > div").css("display", "none");
+        
+        //Call in the info box
+        $(".more a").click(function(){
+          $("#infobox").animate({bottom: '400px' }, 300);
+          $("#fade_bg").fadeIn();
+          return false;
+        });
+        
+        //Expand more info button on hover
+        $(".more").hover(function(){
+          $(this).stop().animate({width: '225px' }, 200).css({'z-index' : '10'});
+        }, function () {
+          $(this).stop().animate({width: '50px' }, 200).css({'z-index' : '1'});
+        });
+        
+        //Show description for selected item
+        $("#couch a").click(function(){
+          $("#couch_info").show();
+        });
+        
+        //Remove background, info box and hide all descriptions
+        $("#fade_bg, .close").click(function(){
+          $("#fade_bg").fadeOut();
+          $("#infobox").animate({bottom: '-200px' }, 300, function() {
+            //$("#infobox > div").css("display", "none");
+          });
+          return false;
+        });
+
+
+      });
+    </script>
+
+  </body>
+</html>
