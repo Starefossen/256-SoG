@@ -1,11 +1,32 @@
 #picture { 
-  position  : relative;top:20px;
-  width     : 1000px;
-  height    : 685px;
-  margin    : 0px auto;
-  background: #FFF url('../img/tsog1000.png');
-  overflow  : hidden;
+  position      : relative;
+  top           : 20px;
+  width         : 1000px;
+  height        : 685px;
+  margin        : 0px auto;
+  background    : #FFF url('../img/tsog1000.png');
+  overflow      : hidden;
 }  
+
+#picture > a.overlay {
+  position      : absolute;
+  padding       : 5px;
+  text-align    : left;
+  overflow      : hidden;
+
+  background: transparent url(../img/note/note-overlay.png) no-repeat 0 0;
+
+                 border: 5px solid #feb515;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+   -webkit-border-image: url(../img/note/border-image.png) 5 5 5 5 stretch;
+      -moz-border-image: url(../img/note/border-image.png) 5 5 5 5 stretch;
+}
+
+#picture > a.overlay:hover {
+  background    : none; 
+  
+}
 
 /* General More Button */ 
 #picture .more {
