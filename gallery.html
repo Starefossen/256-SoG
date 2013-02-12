@@ -291,7 +291,7 @@
     <script src="assets/js/fancybox/jquery.fancybox.js"></script>    
     <script type="text/javascript">
       $(document).ready(function() {
-        $('a.thumbnail').fancybox({arrows : true});
+        $('a.thumbnail').fancybox({type : 'iframe', arrows : true});
         $('#slideshow').on('click', function() {
           $.fancybox.open($('a.thumbnail'), {
             autoPlay: true
