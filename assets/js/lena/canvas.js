@@ -32,6 +32,10 @@ var instr = function( enable, mask, op ) {
       word = "#4096EE",
       data = "#36393D";
   
+  signals.enable.color    = (enable ? ctrl : disa);
+  signals.mask.color      = (enable && mask ? ctrl : disa);
+  signals.op.color        = (enable ? data : disa);
+  
   signals.set_state.color = disa;
   signals.com_in.color    = (enable && (op === 'FWRD' || op === 'RESW') ? ctrl : disa);
   signals.com.color       = (enable && (op === 'FWRD' || op === 'SEND') ? ctrl : disa);
@@ -43,6 +47,7 @@ var instr = function( enable, mask, op ) {
   signals.state_id.color  = (enable && mask ? ctrl : disa);
   signals.stMux_st.color  = (enable ? data : disa);
   
+  // swap
   signals.swap.color      = (enable && op === 'SWAP' ? ctrl : disa);
   signals.swap_sReg.color = (enable && op === 'SWAP' ? ctrl : disa);
   signals.swap_sMux.color = (enable && op === 'SWAP' ? ctrl : disa);
@@ -54,8 +59,9 @@ var instr = function( enable, mask, op ) {
   // sReg
   signals.sReg_sMux.color = (enable && op === 'SWAP' ? word : disa);
   signals.alu_sReg.color  = (enable && op === 'SWAP' ? word : disa);
-  signals.stepIn_sReg.color= (enable && op === 'STEP' ? ctrl : disa);
+  signals.stepIn_sReg.color=(enable && op === 'STEP' ? ctrl : disa);
   signals.sIn_sReg.color  = (enable && op === 'STEP' ? word : disa);
+  signals.sReg_sOut.color = (enable && op === 'STEP' ? word : disa);
   
   // alu
   signals.alu.color       = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? word : disa);
@@ -76,10 +82,16 @@ var instr = function( enable, mask, op ) {
   signals.reg3_com3.color = (enable && op === 'SEND' ? word : disa);
   
   // com in
-  signals.com0.color      = (enable && op === 'FWRD' ? word : disa);
-  signals.com1.color      = (enable && op === 'FWRD' ? word : disa);
-  signals.com2.color      = (enable && op === 'FWRD' ? word : disa);
-  signals.com3.color      = (enable && op === 'FWRD' ? word : disa);
+  signals.nIn_com0.color  = (enable && op === 'FWRD' ? word : disa);
+  signals.sIn_com1.color  = (enable && op === 'FWRD' ? word : disa);
+  signals.eIn_com2.color  = (enable && op === 'FWRD' ? word : disa);
+  signals.wIn_com3.color  = (enable && op === 'FWRD' ? word : disa);
+
+  // com out
+  signals.com0_eOut.color = (enable && (op === 'FWRD' || op === 'SEND') ? word : disa);
+  signals.com1_sOut.color = (enable && (op === 'FWRD' || op === 'SEND') ? word : disa);
+  signals.com2_wOut.color = (enable && (op === 'FWRD' || op === 'SEND') ? word : disa);
+  signals.com3_nOut.color = (enable && (op === 'FWRD' || op === 'SEND') ? word : disa);
   
   // instr
   signals.r0.color        = (enable && mask ? data : disa);

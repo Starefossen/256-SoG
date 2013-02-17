@@ -10,6 +10,18 @@ signals.instr = {
   width: 4,
   color: '#4096EE'
 };
+signals.enable = {
+  x: 200, y: 25,
+  points: [[0, 50]],
+};
+signals.mask = {
+  x: 225, y: 25,
+  points: [[0, 50]],
+};
+signals.op = {
+  x: 250, y: 25,
+  points: [[0, 50]],
+};
 signals.addr0 = {
   x: 550, y: 25,
   points: [[0, 275]],
@@ -103,8 +115,8 @@ signals.state_id = {
 vhdl.stMux = {
   x: 100, y: 425, h: 50, w: 50,
   label: {
-    text : 'ST MUX',
-    x: 1, y: 0
+    text : 'MUX',
+    x: 14, y: 0
   }
 };
 signals.nIn_stMux = {
@@ -119,8 +131,8 @@ signals.nIn_stMux = {
 vhdl.sMux = {
   x: 150, y: 525, h: 50, w: 50,
   label: {
-    text : 'S MUX',
-    x: 4, y: 0
+    text : 'MUX',
+    x: 14, y: 0
   }
 };
 signals.sMux_stMux = {
@@ -151,6 +163,11 @@ signals.stepIn_sReg = {
 signals.sIn_sReg = {
   x: 0, y: 675,
   points: [[150, 0]],
+  width: 4
+};
+signals.sReg_sOut = {
+  x: 200, y: 675,
+  points: [[800, 0]],
   width: 4
 };
 signals.alu_sReg = {
@@ -253,8 +270,8 @@ signals.reg3_com3 = {
 vhdl.aMux = {
   x: 775, y: 450, h: 50, w: 50,
   label: {
-    text : 'A MUX',
-    x: 5, y: 0
+    text : 'MUX',
+    x: 14, y: 0
   }
 };
 signals.instr_aMux = {
@@ -283,39 +300,47 @@ vhdl.com = {
     x: 65, y: 0
   }
 };
-
-/*--------------------------------------------
-| TO STATE REGISTER
----------------------------------------------*/
-
-
-/*--------------------------------------------
-| REG TO COM
----------------------------------------------*/
-
-/*--------------------------------------------
-| COM IN
----------------------------------------------*/
-signals.com0 = {
-  x: 250+100, y: 300+25,
+signals.nIn_com0 = {
+  x: 350, y: 300+25,
   points: [[0, 500-300-25]],
   width: 4
 };
-signals.com1 = {
-  x: 250+75, y: 300+50,
+signals.sIn_com1 = {
+  x: 325, y: 300+50,
   points: [[0, 500-300-50]],
   width: 4
 };
-signals.com2 = {
-  x: 250+50, y: 300+75,
+signals.eIn_com2 = {
+  x: 300, y: 300+75,
   points: [[0, 500-300-75]],
   width: 4
 };
-signals.com3 = {
-  x: 250+25, y: 300+100,
+signals.wIn_com3 = {
+  x: 275, y: 300+100,
   points: [[0, 500-300-100]],
   width: 4
 };
+signals.com0_eOut = {
+  x: 500, y: 520,
+  points: [[500, 0]],
+  width: 4
+};
+signals.com1_sOut = {
+  x: 500, y: 540,
+  points: [[500, 0]],
+  width: 4
+};
+signals.com2_wOut = {
+  x: 500, y: 560,
+  points: [[500, 0]],
+  width: 4
+};
+signals.com3_nOut = {
+  x: 500, y: 580,
+  points: [[500, 0]],
+  width: 4
+};
+
 
 /*--------------------------------------------
 | STATE MUX
