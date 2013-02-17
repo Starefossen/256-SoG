@@ -1,13 +1,81 @@
 var vhdl = {};
 var signals = {};
 
-// INSTRUCTION DECODER
+/*--------------------------------------------
+| instr
+---------------------------------------------*/
+signals.instr = {
+  x: 0, y: 25,
+  points: [[950, 0]],
+  width: 4,
+  color: '#4096EE'
+};
+signals.addr0 = {
+  x: 550, y: 25,
+  points: [[0, 275]],
+};
+signals.r0 = {
+  x: 525 + 25, y: 25 + 125,
+  points: [[-125, 0], [0, -25]],
+};
+signals.addr1 = {
+  x: 525 + 50, y: 25,
+  points: [[0, (300-25)]],
+};
+signals.addr2 = {
+  x: 525 + 75, y: 25,
+  points: [[0, (300-25)]],
+};
+signals.addr3 = {
+  x: 525 + 100, y: 25,
+  points: [[0, (300-25)]],
+};
+signals.instr_alu = {
+  x: 0+950, y: 25,
+  points: [[0, 625], [-325, 0]]
+}
+
+/*--------------------------------------------
+| id
+---------------------------------------------*/
 vhdl.id = {
   x: 150, y: 75, h: 50, w: 300,
   label: {
     text : 'INSTRUCTION DECODER',
     x: 70, y: 0
   }
+};
+signals.set_state = {
+  x: 150, y: 125,
+  points: [[-75, 0], [0, 50], [25, 0]],
+};
+signals.com_in = {
+  x: 150, y: 100,
+  points: [[-100, 0], [0, 350], [50, 0]],
+};
+signals.swap = {
+  x: 150, y: 75,
+  points: [[-125, 0], [0, 550]],
+};
+signals.swap_sMux = {
+  x: 150, y: 550,
+  points: [[-125, 0]],
+};
+signals.swap_sReg = {
+  x: 150, y: 625,
+  points: [[-125, 0]],
+};
+signals.alu_const = {
+  x: 450, y: 100,
+  points: [[525, 0], [0, 375], [-150, 0]],
+};
+signals.reg_write = {
+  x: 450, y: 125,
+  points: [[200, 0], [0, 175]],
+};
+signals.com = {
+  x: 375, y: 125,
+  points: [[0, 375]],
 };
 
 /*--------------------------------------------
@@ -20,6 +88,14 @@ vhdl.st = {
     x: 5, y: 0
   }
 };
+signals.state_out = {
+   x: 150, y: 175,
+  points: [[850, 0]],
+};
+signals.state_id = {
+  x: 200, y: 175,
+  points: [[0, -50]],
+};
 
 /*--------------------------------------------
 | stMux
@@ -31,12 +107,10 @@ vhdl.stMux = {
     x: 1, y: 0
   }
 };
-
-signals.sIn_stMux = {
-  x: 0, y: vhdl.stMux.y+vhdl.stMux.h+25,
-  points: [[vhdl.stMux.x, 0], [0, -25]],
-  width: 4,
-  color: '#4096EE'
+signals.nIn_stMux = {
+  x: 0, y: 500,
+  points: [[100, 0], [0, -25]],
+  width: 4
 };
 
 /*--------------------------------------------
@@ -49,9 +123,8 @@ vhdl.sMux = {
     x: 4, y: 0
   }
 };
-
 signals.sMux_stMux = {
-  x: vhdl.sMux.x+vhdl.sMux.w/2, y: vhdl.sMux.y,
+  x: 175, y: 525,
   points: [[0, -25],[-25, 0],[0, -25]],
   width: 4
 };
@@ -60,63 +133,55 @@ signals.sMux_stMux = {
 | sReg
 ---------------------------------------------*/
 vhdl.sReg = {
-  x: vhdl.sMux.x, y: 625, h: 50, w: 50,
+  x: 150, y: 625, h: 50, w: 50,
   label: {
     text : 'S REG',
     x: 5, y: 0
   }
 };
-
 signals.sReg_sMux = {
-  x: vhdl.sReg.x, y: vhdl.sReg.y,
-  points: [[0, vhdl.sMux.y+vhdl.sMux.h-vhdl.sReg.y]],
+  x: 150, y: 625,
+  points: [[0, -50]],
   width: 4
 };
-
 signals.stepIn_sReg = {
-  x: 0, y: vhdl.sReg.y+vhdl.sReg.h/2,
-  points: [[vhdl.sReg.x, 0]]
+  x: 0, y: 650,
+  points: [[150, 0]]
 };
-
 signals.sIn_sReg = {
-  x: 0, y: vhdl.sReg.y+vhdl.sReg.h,
-  points: [[vhdl.sReg.x, 0]],
+  x: 0, y: 675,
+  points: [[150, 0]],
   width: 4
 };
-
+signals.alu_sReg = {
+  x: 200, y: 600,
+  points: [[0, 25]],
+  width: 4
+};
 
 /*--------------------------------------------
-| ALU
+| alu
 ---------------------------------------------*/
 vhdl.alu = {
-  x: 550, y: 575, h: 50, w: 75,
+  x: 550, y: 600, h: 50, w: 75,
   label: {
     text : 'ALU',
     x: 25, y: 0
   }
 };
-
 signals.alu = {
-  x: vhdl.alu.x, y: vhdl.alu.y+vhdl.alu.h/2,
-  points: [[vhdl.sMux.x+vhdl.sMux.w-vhdl.alu.x, 0]],
+  x: 550, y: 625,
+  points: [[-325, 0], [0, -25], [-25, 0]],
   width: 4
 };
-
 signals.alu_sMux = {
-  x: vhdl.sMux.x+vhdl.sMux.w, y: vhdl.sMux.y+vhdl.sMux.h+25,
+  x: 200, y: 600,
   points: [[0, -25]],
   width: 4
 };
 
-signals.alu_sReg = {
-  x: vhdl.sReg.x+vhdl.sReg.w, y: vhdl.sReg.y-25,
-  points: [[0, 25]],
-  width: 4
-};
-
-
 /*--------------------------------------------
-| REGISTERS
+| reg
 ---------------------------------------------*/
 vhdl.reg = {
   x: 525, y: 300, h: 125, w: 150,
@@ -125,10 +190,94 @@ vhdl.reg = {
     x: 23, y: 0
   }
 };
+signals.reg1_alu = {
+  x: 750, y: 350,
+  points: [[0, 255], [-125, 0]],
+  width: 4
+}
+signals.nIn_in0 = {
+  x: 125, y: 425,
+  points: [[0, -100], [400, 0]],
+  width: 4,
+};
+signals.sIn_in1 = {
+  x: 0, y: 350,
+  points: [[525, 0]],
+  width: 4
+};
+signals.eIn_in2 = {
+  x: 0, y: 375,
+  points: [[525, 0]],
+  width: 4
+};
+signals.wIn_in3 = {
+  x: 0, y: 400,
+  points: [[525, 0]],
+  width: 4
+};
+signals.reg0_com0 = {
+  x: 675, y: 325,
+  points: [[50, 0], [0, -50], [-250, 0], [0, 225]],
+  width: 4
+};
+signals.reg1 = {
+  x: 675, y: 350,
+  points: [[75, 0]],
+  width: 4
+}
+signals.reg1_com1 = {
+  x: 750, y: 350,
+  points: [[0, -100], [-300, 0], [0, 250]],
+  width: 4
+};
+signals.reg2 = {
+  x: 675, y: 375,
+  points: [[100, 0]],
+  width: 4
+}
+signals.reg2_com2 = {
+  x: 775, y: 375,
+  points: [[0, -150], [-350, 0], [0, 275]],
+  width: 4
+};
+signals.reg3_com3 = {
+  x: 675, y: 400,
+  points: [[125, 0], [0, -200], [-400, 0], [0, 300]],
+  width: 4
+};
 
-// COMMUNICATION
+
+/*--------------------------------------------
+| aMux
+---------------------------------------------*/
+vhdl.aMux = {
+  x: 775, y: 450, h: 50, w: 50,
+  label: {
+    text : 'A MUX',
+    x: 5, y: 0
+  }
+};
+signals.instr_aMux = {
+  x: 825, y: 25,
+  points: [[0, 425]],
+  width: 4
+};
+signals.reg2_aMux = {
+  x: 775, y: 375,
+  points: [[0, 75]],
+  width: 4
+}
+signals.aMux_alu = {
+  x: 800, y: 500,
+  points: [[0, 125], [-175, 0]],
+  width: 4
+}
+
+/*--------------------------------------------
+| com
+---------------------------------------------*/
 vhdl.com = {
-  x: 250, y: 450, h: 100, w: 250,
+  x: 250, y: 500, h: 100, w: 250,
   label: {
     text : 'COMMUNICATION',
     x: 65, y: 0
@@ -136,176 +285,42 @@ vhdl.com = {
 };
 
 /*--------------------------------------------
-| FROM INSTRUCTION DECODER
----------------------------------------------*/
-signals.set_state = {
-  x: vhdl.id.x, y: vhdl.id.y+vhdl.id.h,
-  points: [[-((vhdl.id.x-vhdl.st.x)+25), 0], [0, ((vhdl.st.y-(vhdl.id.y+vhdl.id.h))+(vhdl.st.h/2))], [25, 0]],
-  color: '#FF1A00'
-};
-signals.com_in = {
-  x: vhdl.id.x, y: vhdl.id.y+vhdl.id.h-25,
-  points: [[-((vhdl.id.x-vhdl.stMux.x)+50), 0], [0, ((vhdl.stMux.y-(vhdl.id.y+vhdl.id.h-25))+(vhdl.stMux.h/2))], [50, 0]],
-  color: '#FF1A00'
-};
-signals.swap = {
-  x: vhdl.id.x, y: vhdl.id.y+vhdl.id.h-50,
-  points: [[-125, 0], [0, 550]],
-  color: '#FF1A00'
-};
-signals.swap_sMux = {
-  x: vhdl.sMux.x, y: vhdl.sMux.y+vhdl.sMux.h/2,
-  points: [[-125, 0]],
-  color: '#FF1A00'
-};
-signals.swap_sReg = {
-  x: vhdl.sReg.x, y: vhdl.sReg.y,
-  points: [[-125, 0]],
-  color: '#FF1A00'
-};
-signals.alu_const = {
-  x: vhdl.id.x+vhdl.id.w, y: vhdl.id.y+vhdl.id.h-25,
-  points: [[525, 0], [0, 400]],
-  color: '#FF1A00'
-};
-signals.reg_write = {
-  x: vhdl.id.x+vhdl.id.w, y: vhdl.id.y+vhdl.id.h,
-  points: [[200, 0], [0, (vhdl.reg.y-(vhdl.id.y+vhdl.id.h))]],
-  color: '#FF1A00'
-};
-signals.com = {
-  x: vhdl.com.x+(vhdl.com.w/2), y: vhdl.id.y+vhdl.id.h,
-  points: [[0, vhdl.com.y-(vhdl.id.y+vhdl.id.h)]],
-  color: '#FF1A00'
-};
-
-/*--------------------------------------------
 | TO STATE REGISTER
 ---------------------------------------------*/
-signals.state_out = {
-   x: vhdl.st.x+vhdl.st.w, y: vhdl.st.y+(vhdl.st.h/2),
-  points: [[1000-(vhdl.st.x+vhdl.st.w), 0]],
-}
-signals.state_id = {
-  x: vhdl.st.x+vhdl.st.w+50, y: vhdl.st.y+(vhdl.st.h/2),
-  points: [[0, -((vhdl.st.y-(vhdl.id.y+vhdl.id.h))+(vhdl.st.h/2))]],
-}
 
-/*--------------------------------------------
-| IN TO REG
----------------------------------------------*/
-signals.in0 = {
-  x: vhdl.stMux.x+vhdl.stMux.w/2, y: vhdl.reg.y+25,
-  points: [[vhdl.reg.x-vhdl.stMux.x-vhdl.stMux.w/2, 0]],
-  width: 4,
-  color: '#4096EE'
-};
-signals.in1 = {
-  x: 0, y: vhdl.reg.y+50,
-  points: [[vhdl.reg.x, 0]],
-  width: 4,
-  color: '#4096EE'
-};
-signals.in2 = {
-  x: 0, y: vhdl.reg.y+75,
-  points: [[vhdl.reg.x, 0]],
-  width: 4,
-  color: '#4096EE'
-};
-signals.in3 = {
-  x: 0, y: vhdl.reg.y+100,
-  points: [[vhdl.reg.x, 0]],
-  width: 4,
-  color: '#4096EE'
-};
 
 /*--------------------------------------------
 | REG TO COM
 ---------------------------------------------*/
-signals.out0 = {
-  x: vhdl.reg.x+vhdl.reg.w, y: vhdl.reg.y+25,
-  points: [[50, 0], [0, -50], [-(vhdl.reg.w+0+(vhdl.reg.x-vhdl.reg.y-vhdl.reg.w)+25), 0], [0, (vhdl.com.y-vhdl.reg.y)+25]],
-  width: 4
-};
-signals.out1 = {
-  x: vhdl.reg.x+vhdl.reg.w, y: vhdl.reg.y+50,
-  points: [[75, 0], [0, -100], [-(vhdl.reg.w+25+(vhdl.reg.x-vhdl.reg.y-vhdl.reg.w)+50), 0], [0, (vhdl.com.y-vhdl.reg.y)+50]],
-  width: 4
-};
-signals.out2 = {
-  x: vhdl.reg.x+vhdl.reg.w, y: vhdl.reg.y+75,
-  points: [[100, 0], [0, -150], [-(vhdl.reg.w+50+(vhdl.reg.x-vhdl.reg.y-vhdl.reg.w)+75), 0], [0, (vhdl.com.y-vhdl.reg.y)+75]],
-  width: 4
-};
-signals.out3 = {
-  x: vhdl.reg.x+vhdl.reg.w, y: vhdl.reg.y+100,
-  points: [[125, 0], [0, -200], [-(vhdl.reg.w+75+(vhdl.reg.x-vhdl.reg.y-vhdl.reg.w)+100), 0], [0, (vhdl.com.y-vhdl.reg.y)+100]],
-  width: 4
-};
 
 /*--------------------------------------------
 | COM IN
 ---------------------------------------------*/
 signals.com0 = {
-  x: vhdl.com.x+100, y: vhdl.reg.y+25,
-  points: [[0, vhdl.com.y-vhdl.reg.y-25]],
-  width: 4,
-  color: '#4096EE'
+  x: 250+100, y: 300+25,
+  points: [[0, 500-300-25]],
+  width: 4
 };
 signals.com1 = {
-  x: vhdl.com.x+75, y: vhdl.reg.y+50,
-  points: [[0, vhdl.com.y-vhdl.reg.y-50]],
-  width: 4,
-  color: '#4096EE'
+  x: 250+75, y: 300+50,
+  points: [[0, 500-300-50]],
+  width: 4
 };
 signals.com2 = {
-  x: vhdl.com.x+50, y: vhdl.reg.y+75,
-  points: [[0, vhdl.com.y-vhdl.reg.y-75]],
-  width: 4,
-  color: '#4096EE'
+  x: 250+50, y: 300+75,
+  points: [[0, 500-300-75]],
+  width: 4
 };
 signals.com3 = {
-  x: vhdl.com.x+25, y: vhdl.reg.y+100,
-  points: [[0, vhdl.com.y-vhdl.reg.y-100]],
-  width: 4,
-  color: '#4096EE'
+  x: 250+25, y: 300+100,
+  points: [[0, 500-300-100]],
+  width: 4
 };
 
 /*--------------------------------------------
 | STATE MUX
 ---------------------------------------------*/
-signals.st_new = {
-  x: vhdl.stMux.x+vhdl.stMux.w/2, y: vhdl.stMux.y,
-  points: [[0, -(vhdl.stMux.y-vhdl.st.y-vhdl.st.h)]],
-  width: 4,
-  color: '#4096EE'
-};
-
-/*--------------------------------------------
-| INSTRUCTION
----------------------------------------------*/
-signals.inst = {
-  x: 0, y: 25,
-  points: [[800, 0]],
-  width: 4
-};
-signals.addr0 = {
-  x: vhdl.reg.x + 25, y: signals.inst.y,
-  points: [[0, (vhdl.reg.y-signals.inst.y)]],
-};
-signals.r0 = {
-  x: vhdl.reg.x + 25, y: signals.inst.y + 125,
-  points: [[-125, 0], [0, -25]],
-};
-signals.addr1 = {
-  x: vhdl.reg.x + 50, y: signals.inst.y,
-  points: [[0, (vhdl.reg.y-signals.inst.y)]],
-};
-signals.addr2 = {
-  x: vhdl.reg.x + 75, y: signals.inst.y,
-  points: [[0, (vhdl.reg.y-signals.inst.y)]],
-};
-signals.addr3 = {
-  x: vhdl.reg.x + 100, y: signals.inst.y,
-  points: [[0, (vhdl.reg.y-signals.inst.y)]],
+signals.stMux_st = {
+  x: 125, y: 325,
+  points: [[0, -125]],
 };

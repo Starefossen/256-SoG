@@ -6,8 +6,8 @@ context.font = "10pt monaco";
 // Draw line function
 var line = function(x, y, width, color) {
   context.lineWidth = width || 2
-  context.strokeStyle = color || '#000000'
-  context.fillStyle = color || '#000000'
+  context.strokeStyle = color || '#C0C0C0'
+  context.fillStyle = color || '#C0C0C0'
   context.beginPath();
   context.moveTo(x, y);
   return {
@@ -27,16 +27,74 @@ var line = function(x, y, width, color) {
 
 // Set instruction
 var instr = function( enable, mask, op ) {
-  signals.set_state.color = '#C0C0C0'
-  signals.com_in.color    = (enable && op === 'COM' ? '#FF1A00' : '#C0C0C0')
-  signals.com.color       = (enable && op === 'COM' ? '#FF1A00' : '#C0C0C0')
-  signals.alu_const.color = (enable && op === 'ALU' ? '#FF1A00' : '#C0C0C0')
-  signals.reg_write.color = (enable && op === 'ALU' ? '#FF1A00' : '#C0C0C0')
+  var ctrl = "#FF1A00",
+      disa = "#C0C0C0",
+      word = "#4096EE",
+      data = "#36393D";
+  
+  signals.set_state.color = disa;
+  signals.com_in.color    = (enable && (op === 'FWRD' || op === 'RESW') ? ctrl : disa);
+  signals.com.color       = (enable && (op === 'FWRD' || op === 'SEND') ? ctrl : disa);
+  signals.alu_const.color = (enable && op === 'ALU_I' ? ctrl : disa);
+  signals.reg_write.color = (enable && op !== 'SEND' ? ctrl : disa);
+  
+  // state reg
+  signals.state_out.color = (enable ? '#000000' : disa);
+  signals.state_id.color  = (enable && mask ? ctrl : disa);
+  signals.stMux_st.color  = (enable ? data : disa);
+  
+  signals.swap.color      = (enable && op === 'SWAP' ? ctrl : disa);
+  signals.swap_sReg.color = (enable && op === 'SWAP' ? ctrl : disa);
+  signals.swap_sMux.color = (enable && op === 'SWAP' ? ctrl : disa);
+  
+  // stMux
+  signals.nIn_stMux.color = (enable && (op === 'FWRD' || op === 'RESW') ? word : disa);
+  signals.sMux_stMux.color= (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? word : disa);
 
-  signals.swap.color      = (enable && op === 'SWP' ? '#FF1A00' : '#C0C0C0')
-  signals.swap_sReg.color = (enable && op === 'SWP' ? '#FF1A00' : '#C0C0C0')
-  signals.swap_sMux.color = (enable && op === 'SWP' ? '#FF1A00' : '#C0C0C0')
-
+  // sReg
+  signals.sReg_sMux.color = (enable && op === 'SWAP' ? word : disa);
+  signals.alu_sReg.color  = (enable && op === 'SWAP' ? word : disa);
+  signals.stepIn_sReg.color= (enable && op === 'STEP' ? ctrl : disa);
+  signals.sIn_sReg.color  = (enable && op === 'STEP' ? word : disa);
+  
+  // alu
+  signals.alu.color       = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? word : disa);
+  signals.alu_sMux.color  = (enable && (op === 'ALU_R' || op === 'ALU_I') ? word : disa);
+  
+  // reg in
+  signals.nIn_in0.color   = (enable && op !== 'SEND' ? word : disa);
+  signals.sIn_in1.color   = (enable && (op === 'FWRD' || op === 'RESW') ? word : disa);
+  signals.eIn_in2.color   = (enable && (op === 'FWRD' || op === 'RESW') ? word : disa);
+  signals.wIn_in3.color   = (enable && (op === 'FWRD' || op === 'RESW') ? word : disa);
+  
+  // reg out
+  signals.reg0_com0.color = (enable && op === 'SEND' ? word : disa);
+  signals.reg1_com1.color = (enable && op === 'SEND' ? word : disa);
+  signals.reg1.color      = (enable && !(op === 'FWRD' || op === 'RESW') ? word : disa);
+  signals.reg2_com2.color = (enable && op === 'SEND' ? word : disa);
+  signals.reg2.color      = (enable && !(op === 'FWRD' || op === 'RESW' || op === 'ALU_I') ? word : disa);
+  signals.reg3_com3.color = (enable && op === 'SEND' ? word : disa);
+  
+  // com in
+  signals.com0.color      = (enable && op === 'FWRD' ? word : disa);
+  signals.com1.color      = (enable && op === 'FWRD' ? word : disa);
+  signals.com2.color      = (enable && op === 'FWRD' ? word : disa);
+  signals.com3.color      = (enable && op === 'FWRD' ? word : disa);
+  
+  // instr
+  signals.r0.color        = (enable && mask ? data : disa);
+  signals.addr0.color     = (enable ? data : disa);
+  signals.addr1.color     = (enable ? data : disa);
+  signals.addr2.color     = (enable ? data : disa);
+  signals.addr3.color     = (enable && (op === 'SEND' || op === 'FWRD' || op === 'RESW') ? data : disa);
+  signals.instr_alu.color = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? ctrl : disa);
+ 
+  // aMux
+  signals.instr_aMux.color= (enable && op === 'ALU_I' ? word : disa);
+  signals.reg1_alu.color  = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? word : disa);
+  signals.reg2_aMux.color = (enable && (op === 'ALU_R' || op === 'SWAP') ? word : disa);
+  signals.aMux_alu.color  = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? word : disa)
+  //4096EE
 
   redraw();
 }
@@ -54,6 +112,7 @@ var draw = function() {
   for (var obj in vhdl) {
     obj = vhdl[obj];
     context.fillStyle = "#ffffff";
+    context.strokeStyle = "#000000"
     context.fillRect(obj.x, obj.y, obj.w, obj.h);
     context.strokeRect(obj.x, obj.y, obj.w, obj.h);
     if (typeof obj.label !== 'undefined') {
