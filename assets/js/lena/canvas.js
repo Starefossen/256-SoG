@@ -32,10 +32,18 @@ var instr = function( enable, mask, op ) {
       word = "#4096EE",
       data = "#36393D";
   
+  // instr
   signals.enable.color    = (enable ? ctrl : disa);
   signals.mask.color      = (enable && mask ? ctrl : disa);
   signals.op.color        = (enable ? data : disa);
+  signals.r0.color        = (enable && mask ? data : disa);
+  signals.addr0.color     = (enable ? data : disa);
+  signals.addr1.color     = (enable ? data : disa);
+  signals.addr2.color     = (enable ? data : disa);
+  signals.addr3.color     = (enable && (op === 'SEND' || op === 'FWRD' || op === 'RESW') ? data : disa);
+  signals.instr_alu.color = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? data : disa);
   
+  // id
   signals.set_state.color = disa;
   signals.com_in.color    = (enable && (op === 'FWRD' || op === 'RESW') ? ctrl : disa);
   signals.com.color       = (enable && (op === 'FWRD' || op === 'SEND') ? ctrl : disa);
@@ -93,14 +101,6 @@ var instr = function( enable, mask, op ) {
   signals.com2_wOut.color = (enable && (op === 'FWRD' || op === 'SEND') ? word : disa);
   signals.com3_nOut.color = (enable && (op === 'FWRD' || op === 'SEND') ? word : disa);
   
-  // instr
-  signals.r0.color        = (enable && mask ? data : disa);
-  signals.addr0.color     = (enable ? data : disa);
-  signals.addr1.color     = (enable ? data : disa);
-  signals.addr2.color     = (enable ? data : disa);
-  signals.addr3.color     = (enable && (op === 'SEND' || op === 'FWRD' || op === 'RESW') ? data : disa);
-  signals.instr_alu.color = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? ctrl : disa);
- 
   // aMux
   signals.instr_aMux.color= (enable && op === 'ALU_I' ? word : disa);
   signals.reg1_alu.color  = (enable && (op === 'ALU_R' || op === 'ALU_I' || op === 'SWAP') ? word : disa);
