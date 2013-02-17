@@ -61,8 +61,14 @@
       </div>
       
       <!-- Instruction set -->
-      <h2>Instruction set</h2>
-      <p>Instruction set for the LENA architecture.</p>
+      <h2>Instruction set
+        <div class="btn-group pull-right" data-toggle="buttons-radio">
+          <button type="button" class="btn btn-success active">ALU</button>
+          <button type="button" class="btn btn-success">COM</button>
+          <button type="button" class="btn btn-success">SWP</button>
+        </div>
+      </h2>
+      <canvas id="myCanvas" width="1000" height="700" style="border:2px solid #000000; background-color: #EEEEEE;">
       
       <hr>
 
@@ -77,9 +83,14 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/lena/vhdl.js"></script>
+    <script src="assets/js/lena/canvas.js"></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-        $('a[rel="tooltip"]').tooltip()
+      $(document).ready(function() {        
+        instr(true, false, $('.btn-group .active').html());
+        $('.btn-group button').on('click', function() {
+          instr(true, false, $(this).html());
+        });
       });
     </script>
 
