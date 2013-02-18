@@ -61,16 +61,19 @@
       </div>
       
       <!-- Instruction set -->
-      <h2>Instruction set
-        <div class="btn-group pull-right" data-toggle="buttons-radio">
-          <button type="button" class="btn btn-success active">ALU_R</button>
-          <button type="button" class="btn btn-success">ALU_I</button>
-          <button type="button" class="btn btn-info">SEND</button>
-          <button type="button" class="btn btn-info">FWRD</button>
-          <button type="button" class="btn btn-info">RESW</button>
-          <button type="button" class="btn btn-warning">SWAP</button>
-        </div>
+      <h2>SIMD Node
+        <small>Architecture for SIMD instructions </small>
+          <div class="btn-group pull-right" data-toggle="buttons-radio">
+            <button type="button" id="btn-alu-r" class="btn btn-success active">ALU_R</button>
+            <button type="button" id="btn-alu-i" class="btn btn-success">ALU_I</button>
+            <button type="button" id="btn-send" class="btn btn-info">SEND</button>
+            <button type="button" id="btn-fwrd" class="btn btn-info">FWRD</button>
+            <button type="button" id="btn-resw" class="btn btn-info">RESW</button>
+            <button type="button" id="btn-swap" class="btn btn-warning">SWAP</button>
+          </div>
       </h2>
+          
+      <p>Use the buttons on the top to toggle different processor instructions for the LENA <a rel="tooltip" title="One processing element">SIMD node</a>.</p>
       <canvas id="myCanvas" width="1000" height="700" style="border:2px solid #000000; background-color: #EEEEEE;">
       
       <hr>
@@ -90,6 +93,51 @@
     <script src="assets/js/lena/canvas.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {        
+        // Tooltip
+        $('a[rel="tooltip"]').tooltip();
+        $('#btn-alu-r').popover({
+          'title'     : 'Register Instruction',
+          'content'   : 'Reads two register. Saves result in a thrid register.',
+          'placement' : 'bottom',
+          'trigger'   : 'hover',
+          'container' : 'body'
+        });
+        $('#btn-alu-i').popover({
+          'title'     : 'Iimmediate Instruction',
+          'content'   : 'Reads a register and an imidiate value. Saves result in second register.',
+          'placement' : 'bottom',
+          'trigger'   : 'hover',
+          'container' : 'body'
+        });
+        $('#btn-send').popover({
+          'title'     : 'Send',
+          'content'   : 'Send 4 register values to adjacent neighbour nodes.',
+          'placement' : 'bottom',
+          'trigger'   : 'hover',
+          'container' : 'body'
+        }).popover('show');
+        $('#btn-fwrd').popover({
+          'title'     : 'Forward',
+          'content'   : 'Forward incomming data from neighbour nodes. 4-way transfer.',
+          'placement' : 'bottom',
+          'trigger'   : 'hover',
+          'container' : 'body'
+        });
+        $('#btn-resw').popover({
+          'title'     : 'Recieve',
+          'content'   : 'Recieve incomming data from neighbour nodes.',
+          'placement' : 'bottom',
+          'trigger'   : 'hover',
+          'container' : 'body'
+        });
+        $('#btn-swap').popover({
+          'title'     : 'Swap',
+          'content'   : 'Reads a register and sends content to S REG and saves new value.',
+          'placement' : 'bottom',
+          'trigger'   : 'hover',
+          'container' : 'body'
+        });
+        
         instr(true, false, $('.btn-group .active').html());
         $('.btn-group button').on('click', function() {
           instr(true, false, $(this).html());
