@@ -41,23 +41,35 @@
   <body>
 
     <div class="container">
-
-      <div class="masthead">
-        <h3 class="muted"><img src="assets/ico/apple-touch-icon-26-precomposed.png" alt=""> 256 Shades of Gray</h3>
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="overview.html">Overview</a></li>
-                <li><a href="lena.html">LENA</a></li>
-                <li><a href="#">SCU</a></li>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-              </ul>
-            </div>
-          </div>
-        </div><!-- /.navbar -->
+      <h3 class="muted visible-desktop"><img src="assets/ico/apple-touch-icon-26-precomposed.png" alt=""> 256 Shades of Gray</h3>
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand hidden-desktop" href="#">256 Shades of Gray</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="index.html">Home</a></li>
+              <li><a href="overview.html">Overview</a></li>
+              <li><a href="lena.html">LENA</a></li>
+              <li><a href="#">SCU</a></li>
+              <li><a href="team.html">Team</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="https://github.com/martingamm/dmpro2012ytelse/"><i class="icon-download-alt"></i> GitHub</a></li>
+                  <li><a href="http://www.youtube.com/playlist?list=PLA329EE5B0A89A9E0"><i class="icon-facetime-video"></i> YouTube</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!-- /.navbar-inner -->
       </div>
 
       <!-- Carousel -->
@@ -125,7 +137,7 @@
           in the entire process, from early design, making the 
           <a href="#" rel="tooltip" title="Printed circuit board">PCB</a>, choosing components, 
           and writing software to run on the system.</p>
-          <p><a class="btn" href="http://www.ntnu.edu/studies/courses/TDT4295/2012">Course page &raquo;</a></p>
+          <p><a class="btn" href="http://www.ntnu.edu/studies/courses/TDT4295/2012">Course page <i class='icon-share-alt'></i></a></p>
         </div>
         <div class="span4">
           <h2><img src="assets/img/glyph/glyphicons_036_file.png" alt=""> Assignment</h2>
@@ -147,6 +159,7 @@
       
       <!-- Row 2 -->
       <div class="row-fluid">
+        <!--
         <div class="span4">
           <h2><img src="assets/img/glyph/glyphicons_137_cogwheels.png" alt=""> Hardware</h2>
           <p>Our machine is implemented using a custom made 
@@ -157,12 +170,23 @@
           resolution for images.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
        </div>
+       -->
+        <div class="span4">
+          <h2><img src="assets/img/glyph/glyphicons_401_github.png" alt=""> Source Code</h2>
+          <p>Download the entire source code repository for the 256 Shades of Gray machine
+          directly from <a href="">GitHub</a>. This includes all source VHDL project files 
+          for the LENA architecture and all source C-files for the SCU. Fork it and make your
+          own machine.</p>
+          <p><a class="btn btn-primary" href="https://github.com/martingamm/dmpro2012ytelse/">
+            <i class="icon-random icon-white"></i> Fork on GitHub
+          </a></p>
+        </div>
         <div class="span4">
           <h2><img src="assets/img/glyph/glyphicons_037_coins.png" alt=""> Architecture</h2>
           <p>The processing part of LENA processor is the SIMD array. It is organized in a 
           two-dimensional matrix (3x2), as specified by the project assignment. Each node 
           processes one word at a time and can communicate with its four direct neighbors.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+          <p><a class="btn" href="lena.html">View details &raquo;</a></p>
         </div>
         <div class="span4">
           <h2><img src="assets/img/glyph/glyphicons_331_dashboard.png" alt=""> Results</h2>
