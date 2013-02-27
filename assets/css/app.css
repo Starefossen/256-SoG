@@ -3,6 +3,22 @@ body {
   padding-bottom: 60px;
 }
 
+@media (max-width: 979px) {
+  .container.navbar-wrapper {
+    margin-bottom: 0;
+    width: auto;
+  }
+  .navbar-inner {
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-inner {
+    border-radius: 0;
+    margin: 0 -20px;
+  }
+}
+
 /* Slideshow Button */
 #slideshow {
   margin-top: 40px;
